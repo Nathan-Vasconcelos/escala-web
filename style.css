@@ -1,0 +1,60 @@
+body {
+    background: #202124;
+}
+
+h1, h2 {
+    color: #1cbfff;
+}
+
+table {
+    color: white;
+}
+
+table {
+    margin: auto auto;
+}
+
+thead {
+    font-weight: bold;
+    color: #1cbfff;
+    font-size: 1.5em;
+}
+
+th, td {
+    padding: 0.5em 1.5em;
+    text-align: center;
+    border: 1px solid #1cbfff;
+}
+
+td {
+    font-size: 1.25em;
+}
+
+#btn {
+    border: none;
+    padding: 0;
+    padding-left: 0.5em;
+}
+
+.btn-adicionar {
+    background: rgb(0, 190, 0);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 99px;
+    height: 2.9em;
+}
+
+select, input {
+    color: #1cbfff;
+    background: #202124;
+    border: none;
+    font-size: 1.25em;
+}
+
+/*input {
+    color: #1cbfff;
+    background: #202124;
+    border: none;
+}*/
