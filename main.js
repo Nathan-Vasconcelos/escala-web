@@ -10,18 +10,13 @@ const almocoVolta = document.getElementById('almocoVolta');
 const saida = document.getElementById('saida');
 
 botaoAdicionar.addEventListener('click', () => {
-    //console.log('Adicionando linha na tabela');
-    calculaHorasDiaria()
+    somarHoraDia();
+    //somarHora(subtrairHoraDia(evento.target.parentNode.parentNode.cells));
+    //console.log(evento.target.parentNode.parentNode.cells);
     adicionarLinha();
 })
 
 function adicionarLinha() {
-    /*console.log(dia.value);
-    console.log(chegada.value);
-    console.log(almocoIda.value);
-    console.log(almocoVolta.value);
-    console.log(saida.value);*/
-
     const novaLinha = document.createElement('tr');
     tabela.appendChild(novaLinha);
 
@@ -50,18 +45,28 @@ function adicionarLinha() {
     //tabela.appendChild(dadoSaida);
     novaLinha.appendChild(dadoSaida);
 
-    tabela.appendChild(dadoDia);
-    tabela.appendChild(dadoChegada);
-    tabela.appendChild(dadoAlmocoIda);
-    tabela.appendChild(dadoAlmocoVolta);
-    tabela.appendChild(dadoSaida);
+    const novoBotao = document.createElement('td');
+    novoBotao.classList.add('btn');
+    //novaLinha.appendChild(novoBotao);
+
+    const botaoRemover = document.createElement('button');
+    botaoRemover.innerHTML = 'Remover';
+    botaoRemover.classList.add('btn-remover');
+    novoBotao.appendChild(botaoRemover);
+    novaLinha.appendChild(novoBotao);
+
+    tabela.appendChild(novaLinha);
+
+    botaoRemover.addEventListener('click', (evento) => {
+        subtrairHora(subtrairHoraDia(evento.target.parentNode.parentNode.cells));
+        removerLinha(evento.target.parentNode);
+    })
 }
 
-function calculaHorasDiaria() {
+function somarHoraDia() {
     let [horaChegada, minutoChegada] = chegada.value.split(':').map(v => parseInt(v));
-    //console.log(horaChegada);
-    //console.log(minutoChegada);
     let totalMinutosChegada = minutoChegada + (horaChegada * 60);
+    //console.log(horaChegada);
     //console.log(totalMinutosChegada);
 
     let [horaAlmocoIda, minutoAlmocoIda] = almocoIda.value.split(':').map(v => parseInt(v));
@@ -75,13 +80,50 @@ function calculaHorasDiaria() {
     let [horaSaida, minutoSaida] = saida.value.split(':').map(v => parseInt(v));
     let totalMinutosSaida = minutoSaida + (horaSaida * 60);
     //console.log(totalMinutosSaida);
+    
 
     let horasDiaria = ((totalMinutosAlmocoIda - totalMinutosChegada) + (totalMinutosSaida - totalMinutosAlmocoVolta)) / 60;
-    //console.log(horasDiaria);
 
+    //totalHorasSemanais += horasDiaria;
+
+    //hs.innerHTML = totalHorasSemanais;
+    somarHora(horasDiaria);
+}
+
+function removerLinha(elemento) {
+    elemento.parentNode.remove();
+}
+
+function subtrairHoraDia(listaHorarios) {
+    let [horaChegada, minutoChegada] = listaHorarios[1].textContent.split(':').map(v => parseInt(v));
+    let totalMinutosChegada = minutoChegada + (horaChegada * 60);
+
+    let [horaAlmocoIda, minutoAlmocoIda] = listaHorarios[2].textContent.split(':').map(v => parseInt(v));
+    let totalMinutosAlmocoIda = minutoAlmocoIda + (horaAlmocoIda * 60);
+
+    let [horaAlmocoVolta, minutoAlmocoVolta] = listaHorarios[3].textContent.split(':').map(v => parseInt(v));
+    let totalMinutosAlmocoVolta = minutoAlmocoVolta + (horaAlmocoVolta * 60);
+
+    let [horaSaida, minutoSaida] = listaHorarios[4].textContent.split(':').map(v => parseInt(v));
+    let totalMinutosSaida = minutoSaida + (horaSaida * 60);
+
+    let horasDiaria = ((totalMinutosAlmocoIda - totalMinutosChegada) + (totalMinutosSaida - totalMinutosAlmocoVolta)) / 60;
+
+    //totalHorasSemanais -= horasDiaria;
+
+    //hs.innerHTML = totalHorasSemanais;
+    return horasDiaria;
+}
+
+function somarHora(horasDiaria) {
     totalHorasSemanais += horasDiaria;
 
     hs.innerHTML = totalHorasSemanais;
 
     console.log(totalHorasSemanais);
+}
+
+function subtrairHora(horasDiaria) {
+    totalHorasSemanais -= horasDiaria;
+    hs.innerHTML = totalHorasSemanais;
 }

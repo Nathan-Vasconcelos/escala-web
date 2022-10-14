@@ -30,7 +30,7 @@ td {
     font-size: 1.25em;
 }
 
-#btn {
+.btn {
     border: none;
     padding: 0;
     padding-left: 0.5em;
@@ -38,6 +38,16 @@ td {
 
 .btn-adicionar {
     background: rgb(0, 190, 0);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 99px;
+    height: 2.9em;
+}
+
+.btn-remover {
+    background: #ff1c1c;
     color: white;
     border: none;
     border-radius: 3px;
