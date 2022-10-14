@@ -10,10 +10,17 @@ const almocoVolta = document.getElementById('almocoVolta');
 const saida = document.getElementById('saida');
 
 botaoAdicionar.addEventListener('click', () => {
-    somarHoraDia();
+    if(chegada.value !== '' && almocoIda.value !== '' && almocoVolta.value !== '' && saida.value !== '') {
+        somarHoraDia();
+        adicionarLinha();
+    } else {
+        alert ('Informe os horários!');
+    }
+
+    //somarHoraDia();
     //somarHora(subtrairHoraDia(evento.target.parentNode.parentNode.cells));
     //console.log(evento.target.parentNode.parentNode.cells);
-    adicionarLinha();
+    //adicionarLinha();
 })
 
 function adicionarLinha() {
